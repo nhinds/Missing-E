@@ -299,6 +299,42 @@ MissingE.packages.betterReblogs = {
       }
    },
 
+   serializePostData: function(postData, result, propertyPrefix){
+      result = result || [];
+      for(var prop in postData){
+         var jsonValue = null, value = postData[prop];
+         var property = propertyPrefix 
+         ? propertyPrefix + '['+prop+']'
+         : prop;
+         switch(typeof value){
+            case 'string':
+            jsonValue = JSON.stringify(value);
+            break;
+            case 'number':
+            jsonValue = JSON.stringify(value);
+            break;
+            case 'object':
+            MissingE.packages.betterReblogs.serializePostData(value, result, property);
+            jsonValue = undefined;
+            break;
+            case 'boolean':
+            jsonValue = value.toString();
+            break;
+            case 'null':
+            case 'undefined':
+            jsonValue = null;
+            break;
+         }
+         if(jsonValue !== undefined){
+            result.push('"'+property+'":'+jsonValue+'');
+         }
+      }
+      if(!propertyPrefix){
+         return '{'+result.join(',')+'}';
+      }
+   },
+
+
    doReblog: function(item,accountName,queueTags,reblogTags) {
       var reblogMode = {
          "normal":  '0',
@@ -306,20 +342,19 @@ MissingE.packages.betterReblogs = {
          "queue":   '2',
          "private": 'private'
       };
-      var i,isAsk,type,url,postId,perm,user;
-      if ($(item).parent().hasClass('post_controls')) {
+      var i,isAsk,type,url,postId,perm,user, $item = $(item);
+      if ($item.parent().hasClass('post_controls')) {
          type = 'normal';
-         url = $(item).attr('href');
          postId = $(item).closest('li.post').attr('id').match(/\d*$/)[0];
       }
       else {
          type = item.id.replace(/MissingE_quick_reblog_/,'');
          if (!type || type === 'manual') { return; }
-         url = $(item).siblings('a[href!="#"]').attr('href');
          postId = $(item).parent().attr('id').replace(/list_for_/,'');
       }
-      url = location.protocol + '//' + location.host + url;
-      url = url.replace(/\?redirect_to=.*$/,'');
+
+      url = location.protocol + '//' + location.host;
+
       var tags = $('#MissingE_quick_reblog_tags textarea').val();
       tags = tags.replace(/^\s*,/,'').replace(/,(\s*,)*/g,',')
                .replace(/\s*,\s*/g,',').replace(/,$/,'')
@@ -357,111 +392,87 @@ MissingE.packages.betterReblogs = {
          caption = '\n<p>' + caption.replace(/\n/g,'</p>\n<p>') + '</p>';
          caption = caption.replace(/<p><\/p>/g,'<p><br /></p>');
       }
+
+      if(item.attributes['data-reblog-id'] === undefined){
+         item = document.querySelector('[data-reblog-id="'+postId+'"]') || item;
+      }
+
       MissingE.packages.betterReblogs.startReblog(postId);
-      $.ajax({
-         type: "GET",
-         url: url,
-         dataType: "html",
-         postId: postId,
-         tags: tags,
-         mode: mode,
-         error: function() {
-            MissingE.packages.betterReblogs.failReblog(this.postId);
-         },
-         success: function(data) {
-            var i;
-            var frm = data.indexOf('<form');
-            if (frm === -1) {
-               MissingE.packages.betterReblogs.failReblog(this.postId);
-               return;
+      var postData = { //this is the data that will be posted to get more info from Tumblr server. 
+                           //Tumblr then would generate the reblog modal dialog from the returned data. 
+                           //We, however, will just submit it back
+         reblog_id: parseInt(item.getAttribute('data-reblog-id')), //probably the id of the post
+         reblog_key: item.getAttribute('data-reblog-key'), //looks like an anti-forgery key
+         post_type: false, //I think it is supposed to be the post type, but in all my observations, it was sent false. Still need more study.
+                             //I believe this property wil be of use if we use the option to reblog long text posts as text, insted of links 
+         form_key: item.getAttribute('data-user-form-key') //I have no idea what this is, but Tumblr use it, probably
+      };
+      $.post(url + '/svc/post/fetch', JSON.stringify(postData), function(result){
+         var images = {};
+         if(result.post.photos){
+            for (var i = 0, j = result.post.photos.length; i < j; i++) {
+               var photo = result.post.photos[i];
+               images[photo.id] = '';
             }
-            var html = data.substr(frm);
-            while (!(/^<form [^>]*id="edit_post"/.test(html))) {
-               html = html.substr(1);
-               frm = html.indexOf('<form');
-               if (frm === -1) {
-                  MissingE.packages.betterReblogs.failReblog(this.postId);
-                  return;
-               }
-               html = html.substr(frm);
-            }
-            html = html.substr(0,html.indexOf('</form>'));
-            var inputs = html.match(/<input[^>]*>/g);
-            var textareas = html.match(/<textarea[^>]*>[^<]*<\/textarea>/g);
-            var params = {};
-            var name;
-            var bodyBox;
-            for (i=0; i<inputs.length; i++) {
-               var theInput = $(inputs[i]);
-               if (theInput.length === 0) { continue; }
-               name = theInput.attr("name");
-               if (!name) { continue; }
-               if (theInput.attr("type") !== "checkbox" ||
-                   theInput.checked === true) {
-                  params[name] = theInput.val();
-               }
-            }
-            for (i=0; i<textareas.length; i++) {
-               name = textareas[i].match(/name="([^"]*)"/);
-               if (name && !(/id="custom_tweet"/.test(textareas[i]))) {
-                  if (!bodyBox &&
-                      (name[1] === "post[two]" ||
-                       name[1] === "post[three]")) {
-                     bodyBox = name[i];
-                  }
-                  params[name[1]] = $(textareas[i]).text();
-               }
-            }
-            params["post[tags]"] = this.tags;
-            params["post[state]"] = this.mode;
-            params["channel_id"] = accountName;
-            if (isAsk) {
-               if (!perm || perm === "" || !user || user === "") {
-                  MissingE.packages.betterReblogs.failReblog(this.postId);
-                  return;
-               }
-               params["post[two]"] = '<p><a href="' + perm + '" ' +
-                 'class="tumblr_blog">' + user + '</a>:</p><blockquote>' +
-                 params["post[two]"] + '</blockquote>';
-            }
-            if (caption.length > 0 && bodyBox) {
-               params[bodyBox] += caption;
-            }
-            if (!twitter) {
-               delete params["send_to_twitter"];
-            }
-            else {
-               params["send_to_twitter"] = "on";
-            }
-            if (!facebook) {
-               delete params["send_to_fbog"];
-            }
-            else {
-               params["send_to_fbog"] = "on";
-            }
-            delete params["preview_post"];
-            delete params["post[promotion_type]"];
-            $.ajax({
-               type: 'POST',
-               url: this.url,
-               postId: this.postId,
-               data: params,
-               dataType: 'html',
-               error: function() {
-                  MissingE.packages.betterReblogs.failReblog(this.postId);
-               },
-               success: function(txt) {
-                  if (/<body[^>]*id="dashboard_edit_post"/.test(txt) ||
-                      /<body[^>]*id="dashboard_edit_post"/.test(txt) &&
-                      /<ul[^>]*id="errors"[^>]*>/.test(txt)) {
-                     MissingE.packages.betterReblogs.failReblog(this.postId);
-                  }
-                  else {
-                     MissingE.packages.betterReblogs.finishReblog(this.postId);
-                  }
-               }
-            });
          }
+         var newPost = {
+            form_key: postData.form_key,
+            channel_id: accountName,
+            detached: true, //I don't know what this is, but Tumblr submit it
+            reblog: result.post.is_reblog, 
+            reblog_id: postData.reblog_id,
+            reblog_key: postData.reblog_key,
+            errors: false,
+            created_post: result.created_post, //I have no idea what this is
+            context_page: result.context_page || result.post_context_page,
+            post_context_page: result.post_context_page || result.context_page,
+            silent: true, //Tumblr seems to send this too, but I don't know what this means
+            context_id: '', //no  idea what this is
+            reblog_post_id: postData.reblog_id,
+            is_rich_text: { //I don't know what this is. I bet this is important, so I'll investigate it more, later
+               one: '0',
+               two: '1',
+               three: '0'
+            },
+            post:{
+               slug: result.post.slug,
+               source_url: result.post.source_url || 'http://', //the http:// seems to be required
+               date: '',
+               type: result.post.type,
+                  two: (result.post.two || '<p></p>') + (caption || ''), //this seems to be the content of the post itself. I need to test for more types of posts
+                  tags: tags || '',
+                  publish_on: '',
+                  state: mode,//result.post.state.toString(),
+                  photoset_layout: result.post.photoset_layout,
+                  photoset_order: result.post.photos ? ($.map(result.post.photos, function(photo){
+                     return photo.id
+                  }).join(',')) : null
+               },
+               custom_tweet: '',
+               images: images,
+               MAX_FILE_SIZE: '10485760'
+            };
+         $.ajax({
+            type: 'POST',
+            url: url + '/svc/post/update',
+            data: MissingE.packages.betterReblogs.serializePostData(newPost),
+            dataType: 'JSON',
+            contentType: 'application/json',
+            error: function() {
+               MissingE.packages.betterReblogs.failReblog(postId);
+            },
+            success: function(postResult) {
+               if(postResult.errors){
+                  console.log(postResult.errors);
+                  MissingE.packages.betterReblogs.failReblog(postId);
+               }
+               else {
+                  MissingE.packages.betterReblogs.finishReblog(postId);
+               }
+            }
+         });
+      }).fail(function(){
+         MissingE.packages.betterReblogs.failReblog(postId);
       });
    },
 
@@ -821,7 +832,8 @@ MissingE.packages.betterReblogs = {
          $('#posts div.post_controls a[href^="/reblog/"]')
                .live('mouseover',function(e) {
             var reblog = $(this);
-            reblog.addClass('MissingE_quick_reblog_main');
+            reblog.addClass('MissingE_quick_reblog_main')
+                  .removeClass('reblog_button');//remove the class to prevent the native popup from showing up
             if (reblog.hasClass('MissingE_quick_reblogging')) {
                return;
             }
@@ -884,10 +896,13 @@ MissingE.packages.betterReblogs = {
             h = Math.round(pos.top+h-marg);
             w = Math.round(pos.left-w-1);
             qr.removeData('off');
-            qr.css('cssText', 'top:' + h + 'px !important;' +
-                              'left:' + w + 'px !important;');
             if (e.relatedTarget) {
-               qr.show();
+               qr.css('cssText', 'top:' + h + 'px !important;' +
+               'left:' + w + 'px !important; display: block !important;');
+            }
+            else{
+               qr.css('cssText', 'top:' + h + 'px !important;' +
+                                 'left:' + w + 'px !important;');
             }
          }).live('mouseout',function(e) {
             if (!e.relatedTarget ||
