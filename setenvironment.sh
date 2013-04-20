@@ -1,6 +1,9 @@
 #!/bin/bash
 
 CWD=`dirname $0`
+if [ "$CWD" = "." ]; then
+	CWD=`pwd`
+fi
 COMMON="core license identity lib"
 
 for i in $COMMON; do
