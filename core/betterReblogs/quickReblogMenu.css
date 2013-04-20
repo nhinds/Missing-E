@@ -84,12 +84,12 @@ padding:4px 6px !important;
 }
 
 #MissingE_quick_reblog:hover {
-display:block;
+display:block !important;
 }
 
-.MissingE_quick_reblog_tags_inputting,
-.MissingE_quick_reblog_selecting,
-.MissingE_quick_reblog_keys {
+#MissingE_quick_reblog.MissingE_quick_reblog_tags_inputting,
+#MissingE_quick_reblog.MissingE_quick_reblog_selecting,
+#MissingE_quick_reblog.MissingE_quick_reblog_keys {
 display:block !important;
 }
 
