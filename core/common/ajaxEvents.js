@@ -54,54 +54,47 @@ MissingE.utilities.ajaxEvents = {
    run: function() {
       if (location.host === 'www.tumblr.com') {
          $('head').append('<script type="text/javascript">' +
-            'Ajax.Responders.register({' +
-               'onException: function(request, ex) {' +
-                  'this.onComplete(request);' +
-               '},' +
-               'onComplete: function(request) {' +
-                  'if (request.transport.status === 200) {' +
-                     'var type, newPosts;' +
-                     'if (/^(http:\\/\\/www\\.tumblr\\.com)?\\/((dashboard\\/((\\d+\\/\\d+)|(search\\/[^\\/]+\\/\\d+)))|(blog\\/[^\\/]+\\/((\\d+)|(search\\/[^\\/]*\\/\\d+))))/.test(request.url)) {' +
-                        'type = "posts";' +
-                     '}' +
-                     'else if (/^(http:\\/\\/www\\.tumblr\\.com)?\\/((inbox\\/after\\/\\d+)|((blog\\/[^\\/]+\\/)?messages\\/page\\/\\d+))/.test(request.url)) {' +
-                        'type = "messages";' +
-                     '}' +
-                     'else if (/^(http:\\/\\/www\\.tumblr\\.com)?\\/(blog\\/[^\\/]+\\/)?drafts\\/after\\/\\d+/.test(request.url)) {' +
-                        'type = "drafts";' +
-                     '}' +
-                     'else if (/^(http:\\/\\/www\\.tumblr\\.com)?\\/(blog\\/[^\\/]+\\/)?queue\\?page=\\d+/.test(request.url)) {' +
-                        'type = "queue";' +
-                     '}' +
-                     'else if (/^(http:\\/\\/www\\.tumblr\\.com)?\\/tagged\\/[^\\?]+\\?before=\\d*/.test(request.url)) {' +
-                        'type = "tagged";' +
-                     '}' +
-                     'else if (/^(http:\\/\\/www\\.tumblr\\.com)?\\/mega-editor\\/[^\\/]+\\?before_time=\\d*/.test(request.url)) {' +
-                        'type = "mass-editor";' +
-                     '}' +
-                     'else if (/^(http:\\/\\/www\\.tumblr\\.com)?\\/dashboard\\/notes\\/\\d+\\//.test(request.url)) {' +
-                        'type = "notes";' +
-                        'newPosts = ["post_" + request.url.match(/notes\\/(\\d+)/)[1]];' +
-                     '}' +
-                     'if (type === "mass-editor") {' +
-                        'newPosts = request.transport.responseText.match(/<a id="(post_\\d+)/g);' +
-                        'for (i=0; i<newPosts.length; i++) {' +
-                           'newPosts[i] = newPosts[i].replace(/<a id="/,"");' +
-                        '}' +
-                     '}' +
-                     'else if (type !== "notes") {' +
-                        'newPosts = request.transport.responseText.match(/<li id="(post_\\d+)/g);' +
-                        'for (i=0; i<newPosts.length; i++) {' +
-                           'newPosts[i] = newPosts[i].replace(/<li id="/,"");' +
-                        '}' +
-                     '}' +
-                     'var evt = document.createEvent("MessageEvent");' +
-                     'var message;' +
-                     (extension.isFirefox ? 'message = type + ":" + newPosts.join(",");' : 'message = {"type": type, "list": newPosts};') +
-                     'evt.initMessageEvent("MissingEajaxInsert", true, true, message, "http://www.tumblr.com", 0, window);' +
-                     'document.dispatchEvent(evt);' +
+            'jQuery(document).ajaxSuccess(function(event, xhr, settings) {' +
+               'var type, newPosts;' +
+               'if (/^(http:\\/\\/www\\.tumblr\\.com)?\\/((dashboard\\/((\\d+\\/\\d+)|(search\\/[^\\/]+\\/\\d+)))|(blog\\/[^\\/]+\\/((\\d+)|(search\\/[^\\/]*\\/\\d+))))/.test(settings.url)) {' +
+                  'type = "posts";' +
+               '}' +
+               'else if (/^(http:\\/\\/www\\.tumblr\\.com)?\\/((inbox\\/after\\/\\d+)|((blog\\/[^\\/]+\\/)?messages\\/page\\/\\d+))/.test(settings.url)) {' +
+                  'type = "messages";' +
+               '}' +
+               'else if (/^(http:\\/\\/www\\.tumblr\\.com)?\\/(blog\\/[^\\/]+\\/)?drafts\\/after\\/\\d+/.test(settings.url)) {' +
+                  'type = "drafts";' +
+               '}' +
+               'else if (/^(http:\\/\\/www\\.tumblr\\.com)?\\/(blog\\/[^\\/]+\\/)?queue\\?page=\\d+/.test(settings.url)) {' +
+                  'type = "queue";' +
+               '}' +
+               'else if (/^(http:\\/\\/www\\.tumblr\\.com)?\\/tagged\\/[^\\?]+\\?before=\\d*/.test(settings.url)) {' +
+                  'type = "tagged";' +
+               '}' +
+               'else if (/^(http:\\/\\/www\\.tumblr\\.com)?\\/mega-editor\\/[^\\/]+\\?before_time=\\d*/.test(settings.url)) {' +
+                  'type = "mass-editor";' +
+               '}' +
+               'else if (/^(http:\\/\\/www\\.tumblr\\.com)?\\/dashboard\\/notes\\/\\d+\\//.test(settings.url)) {' +
+                  'type = "notes";' +
+                  'newPosts = ["post_" + settings.url.match(/notes\\/(\\d+)/)[1]];' +
+               '}' +
+               'if (type === "mass-editor") {' +
+                  'newPosts = xhr.responseText.match(/<a id="(post_\\d+)/g) || [];' +
+                  'for (i=0; i<newPosts.length; i++) {' +
+                     'newPosts[i] = newPosts[i].replace(/<a id="/,"");' +
                   '}' +
                '}' +
+               'else if (type !== "notes") {' +
+                  'newPosts = xhr.responseText.match(/<li id="(post_\\d+)/g) || [];' +
+                  'for (i=0; i<newPosts.length; i++) {' +
+                     'newPosts[i] = newPosts[i].replace(/<li id="/,"");' +
+                  '}' +
+               '}' +
+               'var evt = document.createEvent("MessageEvent");' +
+               'var message;' +
+               (extension.isFirefox ? 'message = type + ":" + newPosts.join(",");' : 'message = {"type": type, "list": newPosts};') +
+               'evt.initMessageEvent("MissingEajaxInsert", true, true, message, "http://www.tumblr.com", 0, window);' +
+               'document.dispatchEvent(evt);' +
             '});</script>');
       }
    },
