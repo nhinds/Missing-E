@@ -110,16 +110,16 @@ MissingE.packages.timestamps = {
    },
 
    run: function() {
-      $('#posts li.post div.post_info a.MissingE_timestamp_retry')
+      $('#posts div.post div.post_info a.MissingE_timestamp_retry')
          .live('click',function() {
-         var post = $(this).closest('li.post');
+         var post = $(this).closest('div.post');
          if (post.length === 1) {
             MissingE.packages.timestamps
-               .loadTimestamp($(this).parents('li.post').get(0));
+               .loadTimestamp($(this).parents('div.post').get(0));
          }
          return false;
       });
-      $('#posts li.post').each(function(){
+      $('#posts div.post').each(function(){
          MissingE.packages.timestamps.loadTimestamp(this);
       });
       extension.addAjaxListener(function(type,list) {

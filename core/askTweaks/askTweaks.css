@@ -21,26 +21,26 @@
  * along with 'Missing e'. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#posts li.post .MissingE_askTweaks_group {
+#posts div.post .MissingE_askTweaks_group {
 padding-top:15px;
 font-size:11px;
 }
 
-#posts li.post .MissingE_askTweaks_group div {
+#posts div.post .MissingE_askTweaks_group div {
 display:inline-block;
 margin-right:5px;
 }
 
-#posts li.post .MissingE_askTweaks_tags {
+#posts div.post .MissingE_askTweaks_tags {
 border:1px solid #BBB;
 width:200px;
 }
 
-#posts li.post .MissingE_askTweaks_twitter {
+#posts div.post .MissingE_askTweaks_twitter {
 vertical-align:middle;
 }
 
-#posts li.post .MissingE_askTweaks_extraBtn {
+#posts div.post .MissingE_askTweaks_extraBtn {
 margin-right:5px;
 }
 
@@ -137,29 +137,29 @@ background-position:12px -26px !important;
 background-position:10px -62px !important;
 }
 
-#posts li.post input.MissingEmassDeleteSelect {
+#posts div.post input.MissingEmassDeleteSelect {
 margin:0;
 }
 
-#posts li.post.fan_mail .MissingEmassDeleteSpan {
+#posts div.post.fan_mail .MissingEmassDeleteSpan {
 position:absolute;
 top:15px;
 right:20px;
 }
 
-#posts li.post .MissingEmassDeleteSpan {
+#posts div.post .MissingEmassDeleteSpan {
 vertical-align:middle !important;
 margin-left:20px;
 opacity:0.5;
 line-height:18px !important;
 }
 
-#dashboard_submissions #posts li.post .MissingEmassDeleteSpan,
-#dashboard_inbox #posts li.post .MissingEmassDeleteSpan {
+#dashboard_submissions #posts div.post .MissingEmassDeleteSpan,
+#dashboard_inbox #posts div.post .MissingEmassDeleteSpan {
 vertical-align:bottom !important;
 }
 
-#posts li.post .MissingEmassDeleteSpan:hover {
+#posts div.post .MissingEmassDeleteSpan:hover {
 opacity:1;
 }
 

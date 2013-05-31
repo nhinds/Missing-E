@@ -31,7 +31,7 @@ MissingE.packages.magnifier = {
       if (e.which === 1) {
          if ($(this).hasClass('MissingE_magnify_err')) {
             MissingE.packages.magnifier
-               .insertMagnifier($(this).closest('li.post').get(0),'a');
+               .insertMagnifier($(this).closest('div.post').get(0),'a');
             return false;
          }
          var src = $(this).attr('src');
@@ -233,7 +233,7 @@ MissingE.packages.magnifier = {
             curr.fadeOut('fast');
             next.fadeIn('slow');
          });
-         $('#posts li.post[class~="photo"]').each(function(){
+         $('#posts div.post[class~="photo"]').each(function(){
             MissingE.packages.magnifier.insertMagnifier(this);
          });
          extension.addAjaxListener(function(type,list) {

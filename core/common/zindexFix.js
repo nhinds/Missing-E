@@ -37,11 +37,11 @@ MissingE.utilities.zindexFix = {
    },
 
    run: function() {
-      $('#posts li.post embed').each(function() {
+      $('#posts div.post embed').each(function() {
          MissingE.utilities.zindexFix.doEmbed(this);
       });
 
-      $('#posts li.post div.video + input:hidden').each(function() {
+      $('#posts div.post div.video + input:hidden').each(function() {
          MissingE.utilities.zindexFix.futureEmbed(this);
       });
 

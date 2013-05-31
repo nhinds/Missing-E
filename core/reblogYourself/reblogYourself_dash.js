@@ -109,15 +109,15 @@ MissingE.packages.reblogYourself = {
    run: function() {
       if (!MissingE.isTumblrURL(location.href,
                                 ["drafts","queue","messages"])) {
-         $('#posts li.post div.post_controls a.MissingE_reblogYourself_retry')
+         $('#posts div.post div.post_controls a.MissingE_reblogYourself_retry')
             .live('click', function() {
-            var post = $(this).closest('li.post');
+            var post = $(this).closest('div.post');
             if (post.length === 1) {
                MissingE.packages.reblogYourself
-                  .addReblog($(this).parents('li.post').get(0));
+                  .addReblog($(this).parents('div.post').get(0));
             }
          });
-         $('#posts li.post').each(function(){
+         $('#posts div.post').each(function(){
             MissingE.packages.reblogYourself.addReblog(this);
          });
          extension.addAjaxListener(function(type,list) {

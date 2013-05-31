@@ -1767,19 +1767,19 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
                   chrome.extension.getURL("core/safeDash/lockicon.png") +
                   '") !important; ' +
                '} ' +
-               'body.MissingE_safeDash #posts li.post.photo .post_content > div:first-child, ' +
-               'body.MissingE_safeDash #posts li.post.photo .flipcard img, ' +
-               'body.MissingE_safeDash #posts li.post.photo .photoset_photo, ' +
-               'body.MissingE_safeDash #posts li.post.photo img.image_thumbnail, ' +
-               'body.MissingE_safeDash #posts li.post.video .video_thumbnail, ' +
-               'body.MissingE_safeDash #posts li.post.video .video_embed, ' +
-               'body.MissingE_safeDash #posts li.post.video span[id^="video_player"], ' +
+               'body.MissingE_safeDash #posts div.post.photo .post_content > div:first-child, ' +
+               'body.MissingE_safeDash #posts div.post.photo .flipcard img, ' +
+               'body.MissingE_safeDash #posts div.post.photo .photoset_photo, ' +
+               'body.MissingE_safeDash #posts div.post.photo img.image_thumbnail, ' +
+               'body.MissingE_safeDash #posts div.post.video .video_thumbnail, ' +
+               'body.MissingE_safeDash #posts div.post.video .video_embed, ' +
+               'body.MissingE_safeDash #posts div.post.video span[id^="video_player"], ' +
                'body.MissingE_safeDash #posts li.notification blockquote[style], ' +
-               'body.MissingE_safeDash #posts li.post ol.notes blockquote.photo_container, ' +
-               'body.MissingE_safeDash #posts li.post .post_content p .nsfw_span, ' +
-               'body.MissingE_safeDash #posts li.post .post_content img.album_art, ' +
-               'body.MissingE_safeDash #posts li.post .post_content img[onclick*="album_art"], ' +
-               'body.MissingE_safeDash #posts li.post.video .tumblr_video_container { ' +
+               'body.MissingE_safeDash #posts div.post ol.notes blockquote.photo_container, ' +
+               'body.MissingE_safeDash #posts div.post .post_content p .nsfw_span, ' +
+               'body.MissingE_safeDash #posts div.post .post_content img.album_art, ' +
+               'body.MissingE_safeDash #posts div.post .post_content img[onclick*="album_art"], ' +
+               'body.MissingE_safeDash #posts div.post.video .tumblr_video_container { ' +
                   'background-image:url("' +
                   chrome.extension.getURL("core/safeDash/lock.png") +
                   '");' +

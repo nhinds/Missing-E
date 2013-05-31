@@ -21,11 +21,11 @@
  * along with 'Missing e'. If not, see <http://www.gnu.org/licenses/>.
  */
 
-body.MissingE_safeDash #posts li.post.photo .photoset:hover .photoset_photo {
+body.MissingE_safeDash #posts div.post.photo .photoset:hover .photoset_photo {
 background:transparent !important;
 }
 
-body.MissingE_safeDash #posts li.post.photo .photoset:hover .photoset_photo img {
+body.MissingE_safeDash #posts div.post.photo .photoset:hover .photoset_photo img {
 -webkit-transform:scaleX(1) !important;
 -moz-transform:scaleX(1) !important;
 }

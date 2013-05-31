@@ -50,21 +50,21 @@ height:19px;
 background-position:10px -98px !important;
 }
 
-#posts li.post input.MissingEmassDeleteSelect {
+#posts div.post input.MissingEmassDeleteSelect {
 margin:0;
 }
 
-#posts li.post .MissingEmassDeleteSpan {
+#posts div.post .MissingEmassDeleteSpan {
 vertical-align:middle !important;
 margin-left:20px;
 opacity:0.5;
 line-height:18px !important;
 }
 
-#posts li.post.queued .MissingEmassDeleteSpan {
+#posts div.post.queued .MissingEmassDeleteSpan {
 margin-left:15px;
 }
 
-#posts li.post .MissingEmassDeleteSpan:hover {
+#posts div.post .MissingEmassDeleteSpan:hover {
 opacity:1;
 }

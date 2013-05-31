@@ -485,7 +485,7 @@ MissingE.packages.dashboardTweaks = {
 
    navigationSpacer: function() {
       var spacer = $('#MissingE_navSpacer');
-      var lastPost = $('#posts li.post').last();
+      var lastPost = $('#posts div.post').last();
       if (lastPost.length === 0) { return; }
       if (spacer.length === 0) {
          spacer = $('<div />', {id: "MissingE_navSpacer"})
@@ -499,7 +499,7 @@ MissingE.packages.dashboardTweaks = {
    },
 
    gotoLastPost: function() {
-      var lastPost = $('#posts li.post').last();
+      var lastPost = $('#posts div.post').last();
       if (lastPost.length > 0) {
          window.scrollTo(0, lastPost.offset().top - 7);
       }
@@ -534,7 +534,7 @@ MissingE.packages.dashboardTweaks = {
          $.each(list, function (i,val) {
             var node = $('#'+val);
             if (node.get(0).tagName === 'LI' && node.hasClass('post')) {
-               if ($('#posts li.post[id="' + node.attr('id') + '"]')
+               if ($('#posts div.post[id="' + node.attr('id') + '"]')
                      .length > 1) {
                   node.remove();
                }
@@ -641,7 +641,7 @@ MissingE.packages.dashboardTweaks = {
                MissingE.packages.dashboardTweaks.doReplies($('#'+val).get(0));
             });
          });
-         $('#posts li.post').each(function() {
+         $('#posts div.post').each(function() {
             MissingE.packages.dashboardTweaks.doReplies(this);
          });
       }
@@ -773,7 +773,7 @@ MissingE.packages.dashboardTweaks = {
                return false;
             }
             var currPos = $(window).scrollTop()+7;
-            $('#posts li.post:not(#new_post)').each(function() {
+            $('#posts div.post:not(#new_post)').each(function() {
                var postPos = this.offsetTop;
                if (postPos === currPos) {
                   myPid = this.id.match(/post_(\d*)/);
@@ -867,7 +867,7 @@ MissingE.packages.dashboardTweaks = {
          btns.insertBefore(beforeguy);
 
          if (doMassDelete) {
-            $('#posts li.post').each(function() {
+            $('#posts div.post').each(function() {
                MissingE.packages.dashboardTweaks.setupMassDeletePost(this);
             });
             extension.addAjaxListener(function(type,list) {
@@ -880,9 +880,9 @@ MissingE.packages.dashboardTweaks = {
          }
          $('.move_to_top').live('click', function() {
             if ($('#posts li:first').attr('id') === "new_post" &&
-                $('#posts li.post').length > 1) {
+                $('#posts div.post').length > 1) {
                $('#posts').find('li[id^="photo_reply_container"]').detach()
-                  .insertAfter('#posts li.post:not(#new_post):first');
+                  .insertAfter('#posts div.post:not(#new_post):first');
             }
          });
          $('#MissingEdraftQueueTools a').click(function() {
@@ -897,9 +897,9 @@ MissingE.packages.dashboardTweaks = {
                   'Sortable.setSequence("posts",["' + arr.join('","') + '"]);' +
                   'update_publish_on_times();</script>');
                if ($('#posts li:first').attr('id') === "new_post" &&
-                   $('#posts li.post').length > 1) {
+                   $('#posts div.post').length > 1) {
                   $('#posts').find('li[id^="photo_reply_container"]').detach()
-                     .insertAfter('#posts li.post:not(#new_post):first');
+                     .insertAfter('#posts div.post:not(#new_post):first');
                }
             }
             else if (btn.hasClass('select_all')) {
@@ -911,7 +911,7 @@ MissingE.packages.dashboardTweaks = {
             else if (btn.hasClass('deselect_all')) {
                $('#posts input.MissingEmassDeleteSelect').each(function() {
                   this.checked = false;
-                  $(this).closest('li.post').removeClass('MissingEmdSelected');
+                  $(this).closest('div.post').removeClass('MissingEmdSelected');
                });
             }
             else if (btn.hasClass('delete_selected')) {
@@ -958,7 +958,7 @@ MissingE.packages.dashboardTweaks = {
             return false;
          });
          $('input.MissingEmassDeleteSelect').live('change', function() {
-            var item = $(this).closest('li.post');
+            var item = $(this).closest('div.post');
             if (this.checked) {
                item.addClass('MissingEmdSelected');
             }
@@ -1009,7 +1009,7 @@ MissingE.packages.dashboardTweaks = {
                forcePlaceholderSize: true,
                update: function() {
                   var item = $(this);
-                  var ol = item.closest("li.post").find('ol.notes');
+                  var ol = item.closest("div.post").find('ol.notes');
                   var sortorder = ol.data('sortorder');
                   var newsortorder = sortorder;
                   if (!sortorder || sortorder === "" ||
@@ -1052,7 +1052,7 @@ MissingE.packages.dashboardTweaks = {
 
          $('#posts .MissingE_sorterButton').live('click', function() {
             var item = $(this);
-            var ol = item.closest("li.post").find('ol.notes');
+            var ol = item.closest("div.post").find('ol.notes');
             var sortorder = ol.data('sortorder');
             if (item.hasClass('MissingE_unsort')) {
                if (sortorder && sortorder !== "") {

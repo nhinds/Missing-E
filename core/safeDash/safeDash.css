@@ -48,23 +48,23 @@ border-color:rgba(0,0,0,0.39) !important;
 box-shadow:0 0 2px rgba(0,0,0,0.25) inset !important;
 }
 
-#posts li.post .post_content {
+#posts div.post .post_content {
 width:100%;
 }
 
-body.MissingE_safeDash #posts li.post.photo .post_content > div:first-child,
-body.MissingE_safeDash #posts li.post.photo .photoset_photo,
-body.MissingE_safeDash #posts li.post.photo img.image_thumbnail,
-body.MissingE_safeDash #posts li.post.video .video_thumbnail,
-body.MissingE_safeDash #posts li.post.video .video_embed,
-body.MissingE_safeDash #posts li.post.video span[id^="video_player"],
+body.MissingE_safeDash #posts div.post.photo .post_content > div:first-child,
+body.MissingE_safeDash #posts div.post.photo .photoset_photo,
+body.MissingE_safeDash #posts div.post.photo img.image_thumbnail,
+body.MissingE_safeDash #posts div.post.video .video_thumbnail,
+body.MissingE_safeDash #posts div.post.video .video_embed,
+body.MissingE_safeDash #posts div.post.video span[id^="video_player"],
 body.MissingE_safeDash #posts li.notification blockquote[style],
-body.MissingE_safeDash #posts li.post ol.notes blockquote.photo_container,
-body.MissingE_safeDash #posts li.post.photo .flipcard img,
-body.MissingE_safeDash #posts li.post .post_content p .nsfw_span,
-body.MissingE_safeDash #posts li.post .post_content img.album_art,
-body.MissingE_safeDash #posts li.post .post_content img[onclick*="album_art"],
-body.MissingE_safeDash #posts li.post.video .tumblr_video_container {
+body.MissingE_safeDash #posts div.post ol.notes blockquote.photo_container,
+body.MissingE_safeDash #posts div.post.photo .flipcard img,
+body.MissingE_safeDash #posts div.post .post_content p .nsfw_span,
+body.MissingE_safeDash #posts div.post .post_content img.album_art,
+body.MissingE_safeDash #posts div.post .post_content img[onclick*="album_art"],
+body.MissingE_safeDash #posts div.post.video .tumblr_video_container {
 display:inline-block;
 background-color:#BFBFBF !important;
 background-repeat:no-repeat !important;
@@ -73,22 +73,22 @@ border-clip:content-box;
 box-shadow:none !important;
 }
 
-body.MissingE_safeDash #posts li.post.photo .post_content > div.flipcard {
+body.MissingE_safeDash #posts div.post.photo .post_content > div.flipcard {
 display:block !important;
 }
 
-body.MissingE_safeDash #posts li.post.photo .post_content > div:first-child a,
-body.MissingE_safeDash #posts li.post.photo .flipcard a,
-body.MissingE_safeDash #posts li.post.photo .photoset {
+body.MissingE_safeDash #posts div.post.photo .post_content > div:first-child a,
+body.MissingE_safeDash #posts div.post.photo .flipcard a,
+body.MissingE_safeDash #posts div.post.photo .photoset {
 display:inline-block;
 }
 
-body.MissingE_safeDash #posts li.post.photo .photoset_photo {
+body.MissingE_safeDash #posts div.post.photo .photoset_photo {
 height:100%;
 }
 
 body.MissingE_safeDash #posts li.notification blockquote[style],
-body.MissingE_safeDash #posts li.post ol.notes blockquote.photo_container {
+body.MissingE_safeDash #posts div.post ol.notes blockquote.photo_container {
 display:inline-block;
 position:relative;
 width:auto !important;
@@ -97,93 +97,93 @@ max-width:100%;
 }
 
 body.MissingE_safeDash #posts li.notification blockquote[style] img,
-body.MissingE_safeDash #posts li.post ol.notes blockquote.photo_container img {
+body.MissingE_safeDash #posts div.post ol.notes blockquote.photo_container img {
 box-sizing:border-box;
 float:left;
 opacity:0;
 }
 
-body.MissingE_safeDash #posts li.post.photo .post_content > div:first-child:not(.flipcard) img,
-body.MissingE_safeDash #posts li.post.photo .photoset_photo img {
+body.MissingE_safeDash #posts div.post.photo .post_content > div:first-child:not(.flipcard) img,
+body.MissingE_safeDash #posts div.post.photo .photoset_photo img {
 -webkit-transform:scaleX(0) !important;
 -moz-transform:scaleX(0) !important;
 }
 
-body.MissingE_safeDash #posts li.post.photo .post_content > div.flipcard,
-body.MissingE_safeDash #posts li.post.photo .post_content div:hover,
-body.MissingE_safeDash #posts li.post.photo .photoset .photoset_photo:hover,
-body.MissingE_safeDash #posts li.post.photo img.image_thumbnail:hover,
-body.MissingE_safeDash #posts li.post.video .video_thumbnail:hover,
-body.MissingE_safeDash #posts li.post.video .video_embed:hover,
-body.MissingE_safeDash #posts li.post.video span[id^="video_player"]:hover,
-body.MissingE_safeDash #posts li.post.photo .flipcard img:hover,
-body.MissingE_safeDash #posts li.post .post_content p img:hover,
-body.MissingE_safeDash #posts li.post .post_content img.album_art:hover,
-body.MissingE_safeDash #posts li.post .post_content img[onclick*="album_art"]:hover,
-body.MissingE_safeDash #posts li.post .post_content p .nsfw_span:hover {
+body.MissingE_safeDash #posts div.post.photo .post_content > div.flipcard,
+body.MissingE_safeDash #posts div.post.photo .post_content div:hover,
+body.MissingE_safeDash #posts div.post.photo .photoset .photoset_photo:hover,
+body.MissingE_safeDash #posts div.post.photo img.image_thumbnail:hover,
+body.MissingE_safeDash #posts div.post.video .video_thumbnail:hover,
+body.MissingE_safeDash #posts div.post.video .video_embed:hover,
+body.MissingE_safeDash #posts div.post.video span[id^="video_player"]:hover,
+body.MissingE_safeDash #posts div.post.photo .flipcard img:hover,
+body.MissingE_safeDash #posts div.post .post_content p img:hover,
+body.MissingE_safeDash #posts div.post .post_content img.album_art:hover,
+body.MissingE_safeDash #posts div.post .post_content img[onclick*="album_art"]:hover,
+body.MissingE_safeDash #posts div.post .post_content p .nsfw_span:hover {
 background:transparent !important;
 }
 
-body.MissingE_safeDash #posts li.post.photo .post_content div:hover img,
-body.MissingE_safeDash #posts li.post.photo .post_content > div:first-child:not(.flipcard):hover img,
-body.MissingE_safeDash #posts li.post.photo .post_content .photoset .photoset_photo:hover img {
+body.MissingE_safeDash #posts div.post.photo .post_content div:hover img,
+body.MissingE_safeDash #posts div.post.photo .post_content > div:first-child:not(.flipcard):hover img,
+body.MissingE_safeDash #posts div.post.photo .post_content .photoset .photoset_photo:hover img {
 -webkit-transform:scaleX(1) !important;
 -moz-transform:scaleX(1) !important;
 }
 
-body.MissingE_safeDash #posts li.post.photo .post_content .photoset:hover img {
+body.MissingE_safeDash #posts div.post.photo .post_content .photoset:hover img {
 -webkit-transform:scaleX(0) !important;
 -moz-transform:scaleX(0) !important;
 }
 
-body.MissingE_safeDash #posts li.post.video .video_thumbnail img,
-body.MissingE_safeDash #posts li.post.video .video_thumbnail div,
-body.MissingE_safeDash #posts li.post.video .video_embed iframe,
-body.MissingE_safeDash #posts li.post.video span[id^="video_player"] embed,
-body.MissingE_safeDash #posts li.post .post_content p .nsfw_span img,
-body.MissingE_safeDash #posts li.post.video .tumblr_video_container iframe {
+body.MissingE_safeDash #posts div.post.video .video_thumbnail img,
+body.MissingE_safeDash #posts div.post.video .video_thumbnail div,
+body.MissingE_safeDash #posts div.post.video .video_embed iframe,
+body.MissingE_safeDash #posts div.post.video span[id^="video_player"] embed,
+body.MissingE_safeDash #posts div.post .post_content p .nsfw_span img,
+body.MissingE_safeDash #posts div.post.video .tumblr_video_container iframe {
 opacity:0;
 }
 
-body.MissingE_safeDash #posts li.post.video .video_thumbnail:hover img,
-body.MissingE_safeDash #posts li.post.video .video_thumbnail:hover div,
-body.MissingE_safeDash #posts li.post.video .video_embed:hover iframe,
-body.MissingE_safeDash #posts li.post.video span[id^="video_player"]:hover embed,
+body.MissingE_safeDash #posts div.post.video .video_thumbnail:hover img,
+body.MissingE_safeDash #posts div.post.video .video_thumbnail:hover div,
+body.MissingE_safeDash #posts div.post.video .video_embed:hover iframe,
+body.MissingE_safeDash #posts div.post.video span[id^="video_player"]:hover embed,
 body.MissingE_safeDash #posts li.notification blockquote[style] img:hover,
-body.MissingE_safeDash #posts li.post ol.notes blockquote.photo_container img:hover,
-body.MissingE_safeDash #posts li.post .post_content p .nsfw_span:hover img,
-body.MissingE_safeDash #posts li.post.video .tumblr_video_container:hover iframe {
+body.MissingE_safeDash #posts div.post ol.notes blockquote.photo_container img:hover,
+body.MissingE_safeDash #posts div.post .post_content p .nsfw_span:hover img,
+body.MissingE_safeDash #posts div.post.video .tumblr_video_container:hover iframe {
 opacity:1;
 }
 
-body.MissingE_safeDash #posts li.post .post_content {
+body.MissingE_safeDash #posts div.post .post_content {
 overflow:hidden;
 padding-bottom:5px;
 margin-bottom:-5px;
 }
 
-body.MissingE_safeDash #posts li.post.video .post_content,
-body.MissingE_safeDash #posts li.post.regular .post_content,
-body#dashboard_inbox.MissingE_safeDash #posts li.post.note .post_content  {
+body.MissingE_safeDash #posts div.post.video .post_content,
+body.MissingE_safeDash #posts div.post.regular .post_content,
+body#dashboard_inbox.MissingE_safeDash #posts div.post.note .post_content  {
 overflow:visible;
 }
 
-body.MissingE_safeDash #posts li.post .post_content p:empty {
+body.MissingE_safeDash #posts div.post .post_content p:empty {
 display:none !important;
 }
 
-body.MissingE_safeDash #posts li.post.photo .flipcard img,
-body.MissingE_safeDash #posts li.post.photo img.image_thumbnail,
-body.MissingE_safeDash #posts li.post .post_content img.album_art,
-body.MissingE_safeDash #posts li.post .post_content img[onclick*="album_art"] {
+body.MissingE_safeDash #posts div.post.photo .flipcard img,
+body.MissingE_safeDash #posts div.post.photo img.image_thumbnail,
+body.MissingE_safeDash #posts div.post .post_content img.album_art,
+body.MissingE_safeDash #posts div.post .post_content img[onclick*="album_art"] {
 padding-right:100% !important;
 margin-left:-100% !important;
 }
 
-body.MissingE_safeDash #posts li.post.photo .flipcard img:hover,
-body.MissingE_safeDash #posts li.post.photo img.image_thumbnail:hover,
-body.MissingE_safeDash #posts li.post .post_content img.album_art:hover,
-body.MissingE_safeDash #posts li.post .post_content img[onclick*="album_art"]:hover {
+body.MissingE_safeDash #posts div.post.photo .flipcard img:hover,
+body.MissingE_safeDash #posts div.post.photo img.image_thumbnail:hover,
+body.MissingE_safeDash #posts div.post .post_content img.album_art:hover,
+body.MissingE_safeDash #posts div.post .post_content img[onclick*="album_art"]:hover {
 padding-right:0 !important;
 margin-left:0 !important;
 }

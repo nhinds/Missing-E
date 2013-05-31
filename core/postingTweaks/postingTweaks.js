@@ -274,7 +274,7 @@ MissingE.packages.postingTweaks = {
                   .test($(this).text())) {
                return;
             }
-            var id = $(this).closest('li.post').attr('id').match(/\d+$/)[0];
+            var id = $(this).closest('div.post').attr('id').match(/\d+$/)[0];
             var key = $('#form_key').val();
             $.ajax({
                type: "POST",
@@ -643,9 +643,9 @@ MissingE.packages.postingTweaks = {
       }
       else if (settings.addUploader === 1 &&
                MissingE.isTumblrURL(location.href, ["messages"])) {
-         $('#posts li.post a[id^="ask_answer_link_"]').live('click',
+         $('#posts div.post a[id^="ask_answer_link_"]').live('click',
                                                             function() {
-            var post = $(this).closest("li.post");
+            var post = $(this).closest("div.post");
             if (post.length > 0 &&
                 post.find('iframe[src*="upload/image"]').length === 0) {
                MissingE.packages.postingTweaks.addAskUploader(post.get(0));

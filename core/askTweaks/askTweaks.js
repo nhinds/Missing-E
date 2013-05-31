@@ -458,7 +458,7 @@ MissingE.packages.askTweaks = {
             var user = $(this).closest('div.user_menu_list')
                           .find('a[following]').attr('href').match(/[^\/]*$/)
                           .join('');
-            var avatar = $(this).closest('li.post')
+            var avatar = $(this).closest('div.post')
                            .find('div.avatar_and_i a.post_avatar')
                            .css('background-image');
             avatar = avatar.replace(/64\./,'40.');
@@ -538,7 +538,7 @@ MissingE.packages.askTweaks = {
                                  '.getContent();' +
                '}},false);</script>');
          }
-         $('#posts li.post').each(function() {
+         $('#posts div.post').each(function() {
             MissingE.packages.askTweaks
                .moreAnswerOptions(this, settings.tagAsker,
                                   settings.defaultTags,
@@ -601,7 +601,7 @@ MissingE.packages.askTweaks = {
                                     .massDelete.deleteSelected) +
               '</div></a></li></ul>')
                   .insertBefore(beforeguy);
-            $('#posts li.post').each(function() {
+            $('#posts div.post').each(function() {
                MissingE.packages.askTweaks.setupMassDeleteAsk(this);
             });
             extension.addAjaxListener(function(type,list) {
@@ -623,7 +623,7 @@ MissingE.packages.askTweaks = {
                else if (btn.hasClass('deselect_all')) {
                   $('#posts input.MissingEmassDeleteSelect').each(function() {
                      this.checked = false;
-                     $(this).closest('li.post')
+                     $(this).closest('div.post')
                         .removeClass('MissingEmdSelected');
                   });
                }
@@ -671,7 +671,7 @@ MissingE.packages.askTweaks = {
                return false;
             });
             $('input.MissingEmassDeleteSelect').live('change', function() {
-               var item = $(this).closest('li.post');
+               var item = $(this).closest('div.post');
                if (this.checked) {
                   var blog;
                   item.addClass('MissingEmdSelected');

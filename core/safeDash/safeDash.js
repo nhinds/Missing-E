@@ -64,7 +64,7 @@ MissingE.packages.safeDash = {
       var settings = this.settings;
       this.lock = extension.getURL("core/safeDash/lock.png");
 
-      $('#posts li.post').each(function() {
+      $('#posts div.post').each(function() {
          MissingE.packages.safeDash.doHide(this);
       });
       extension.addAjaxListener(function(type, list) {

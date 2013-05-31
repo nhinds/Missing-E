@@ -21,11 +21,11 @@
  * along with 'Missing e'. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#posts li.post.fan_mail div.message span[id$="message_body"] {
+#posts div.post.fan_mail div.message span[id$="message_body"] {
 display:inline !important;
 }
 
-#posts li.post.fan_mail div.message span[id$="read_more"],
-#posts li.post.fan_mail div.message span[id$="message_body_truncated"] {
+#posts div.post.fan_mail div.message span[id$="read_more"],
+#posts div.post.fan_mail div.message span[id$="message_body_truncated"] {
 display:none !important;
 }

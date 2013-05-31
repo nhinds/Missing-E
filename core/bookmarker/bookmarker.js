@@ -235,7 +235,7 @@ MissingE.packages.bookmarker = {
       if (e.which === 1) {
          var post, pid, oldPos, scrollBy, moveWin, oldScroll;
          if ($(this).hasClass("MissingE_ismarked")) {
-            post = $(this).closest('li.post');
+            post = $(this).closest('div.post');
             pid = this.id.match(/\d*$/)[0];
             try {
                oldScroll = $(window).scrollTop();
@@ -256,14 +256,14 @@ MissingE.packages.bookmarker = {
          }
          else {
             var user = '';
-            post = $(this).closest('li.post');
+            post = $(this).closest('div.post');
             if (post.hasClass('is_mine')) {
                user = 'you';
             }
             else if (post.length !== 0) {
                while (post.length !== 0 && post.hasClass('same_user_as_last')) {
                   post = post.prev();
-                  while (post.length !== 0 && !post.is('li.post')) {
+                  while (post.length !== 0 && !post.is('div.post')) {
                      post = post.prev();
                   }
                }
@@ -323,7 +323,7 @@ MissingE.packages.bookmarker = {
             }
             var postVal = parseInt(post,10);
             var markVal = parseInt(marks[j][1],10);
-            var prevPost = $(item).prevAll('li.post:not(#new_post)').first();
+            var prevPost = $(item).prevAll('div.post:not(#new_post)').first();
             if (MissingE.isTumblrURL(location.href, ["dashboardOnly"]) &&
                 postVal < markVal &&
                 ((prevPost.length === 1 &&
@@ -464,7 +464,7 @@ MissingE.packages.bookmarker = {
                      return;
                   }
                   var currPos = $(window).scrollTop()+7;
-                  $('#posts li.post').each(function() {
+                  $('#posts div.post').each(function() {
                      var postPos = this.offsetTop;
                      if (postPos === currPos) {
                         var mark = $(this).find('div.post_controls a.MissingE_mark');
@@ -480,7 +480,7 @@ MissingE.packages.bookmarker = {
                   });
                });
             }
-            $("#posts li.post").each(function() {
+            $("#posts div.post").each(function() {
                MissingE.packages.bookmarker.doMarks(this);
             });
             extension.addAjaxListener(function(type, list) {

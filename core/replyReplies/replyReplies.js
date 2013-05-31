@@ -62,7 +62,7 @@ MissingE.packages.replyReplies = {
       var tags = [];
       arr = $('.MissingE_rt');
       if ($(arr[0]).parent().hasClass('note')) {
-         $(arr[0]).closest('li.post')
+         $(arr[0]).closest('div.post')
             .find('div.post_controls a').each(function() {
                if (/redirect_to/.test(this.href)) {
                   redir = this.href.match(/redirect_to=[^&]*$/)[0];
@@ -71,7 +71,7 @@ MissingE.packages.replyReplies = {
             });
       }
       else {
-         var post = $(arr[0]).parent().prevAll('li.post:first');
+         var post = $(arr[0]).parent().prevAll('div.post:first');
          if (post.hasClass("new_post")) {
             redir = "redirect_to=" + location.pathname.replace(/\//g,'%2F');
          }
@@ -161,7 +161,7 @@ MissingE.packages.replyReplies = {
          newcode = newcode.replace(/\s*$/,'');
          if ($(arr[i]).parent().hasClass('note')) {
             var a,b,z,user,qt,reblnk,x;
-            var main = $(arr[i]).closest('li.post');
+            var main = $(arr[i]).closest('div.post');
             var ans = $(arr[i]).parent();
             var type, chk, anstype;
             var posttxt = "";

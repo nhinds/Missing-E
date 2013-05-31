@@ -291,7 +291,7 @@ MissingE.packages.betterReblogs = {
       }
       else if (item.tagName === 'A' &&
                post.parent().is('div.post_controls') &&
-               post.closest('li.post').hasClass('regular')) {
+               post.closest('div.post').hasClass('regular')) {
          if (/[\w]\?/.test(item.href)) {
             item.setAttribute('href',
                item.getAttribute('href').replace(/(\/text)?\?/,'/text?'));
@@ -345,7 +345,7 @@ MissingE.packages.betterReblogs = {
       var i,isAsk,type,url,postId,perm,user, $item = $(item);
       if ($item.parent().hasClass('post_controls')) {
          type = 'normal';
-         postId = $(item).closest('li.post').attr('id').match(/\d*$/)[0];
+         postId = $(item).closest('div.post').attr('id').match(/\d*$/)[0];
       }
       else {
          type = item.id.replace(/MissingE_quick_reblog_/,'');
@@ -393,19 +393,20 @@ MissingE.packages.betterReblogs = {
          caption = caption.replace(/<p><\/p>/g,'<p><br /></p>');
       }
 
-      if(item.attributes['data-reblog-id'] === undefined){
-         item = document.querySelector('[data-reblog-id="'+postId+'"]') || item;
+      if(item.attributes['data-post-id'] === undefined){
+         item = document.querySelector('[data-post-id="'+postId+'"]') || item;
       }
 
       MissingE.packages.betterReblogs.startReblog(postId);
       var postData = { //this is the data that will be posted to get more info from Tumblr server. 
                            //Tumblr then would generate the reblog modal dialog from the returned data. 
                            //We, however, will just submit it back
-         reblog_id: parseInt(item.getAttribute('data-reblog-id')), //probably the id of the post
+         channel_id: item.getAttribute('data-tumblelog-name'),
+         reblog_id: parseInt(item.getAttribute('data-post-id')), //probably the id of the post
          reblog_key: item.getAttribute('data-reblog-key'), //looks like an anti-forgery key
          post_type: false, //I think it is supposed to be the post type, but in all my observations, it was sent false. Still need more study.
                              //I believe this property wil be of use if we use the option to reblog long text posts as text, insted of links 
-         form_key: item.getAttribute('data-user-form-key') //I have no idea what this is, but Tumblr use it, probably
+         form_key: document.body.getAttribute('data-form-key') //I have no idea what this is, but Tumblr use it, probably
       };
       $.post(url + '/svc/post/fetch', JSON.stringify(postData), function(result){
          var images = {};
@@ -523,7 +524,7 @@ MissingE.packages.betterReblogs = {
                   tags = $('#post_' + postId).find('span.tags a');
                }
                else {
-                  tags = $(this).closest('li.post').find('span.tags a');
+                  tags = $(this).closest('div.post').find('span.tags a');
                }
                var tagarr = [];
                if (MissingE.isTumblrURL(location.href, ["tagged"])) {
@@ -557,7 +558,7 @@ MissingE.packages.betterReblogs = {
          });
       }
       if (settings.fullText === 1) {
-         $('#posts li.post.regular').each(function() {
+         $('#posts div.post.regular').each(function() {
             MissingE.packages.betterReblogs.reblogTextFull(this);
          });
          extension.addAjaxListener(function(type,list) {
@@ -572,15 +573,15 @@ MissingE.packages.betterReblogs = {
          });
       }
       if (settings.reblogAsks === 1) {
-         $('#posts li.post div.post_controls ' +
+         $('#posts div.post div.post_controls ' +
            'a.MissingE_betterReblogs_retryAsk').live('click', function() {
-            var post = $(this).closest('li.post');
+            var post = $(this).closest('div.post');
             if (post.length === 1) {
                MissingE.packages.betterReblogs
-                  .addAskReblog($(this).parents('li.post').get(0));
+                  .addAskReblog($(this).parents('div.post').get(0));
             }
          });
-         $('#posts li.post').each(function(){
+         $('#posts div.post').each(function(){
             MissingE.packages.betterReblogs.addAskReblog(this);
          });
          extension.addAjaxListener(function(type,list) {
@@ -847,7 +848,7 @@ MissingE.packages.betterReblogs = {
             var tagarr = [];
             if (settings.passTags === 1 &&
                 settings.autoFillTags === 1) {
-               var tags = reblog.closest('li.post').find('span.tags a');
+               var tags = reblog.closest('div.post').find('span.tags a');
                if (MissingE.isTumblrURL(location.href, ["tagged"])) {
                   var i;
                   var str = location.href.match(/[^\/\?]*(?:$|\?)/)[0];
@@ -872,7 +873,7 @@ MissingE.packages.betterReblogs = {
                   }
                });
             }
-            var postId = reblog.closest('li.post').attr('id').match(/\d*$/)[0];
+            var postId = reblog.closest('div.post').attr('id').match(/\d*$/)[0];
             if (qr.find('div.MissingE_qr_list').attr('id') !==
                   'list_for_' + postId) {
                qr.find('#MissingE_quick_reblog_tags textarea')
@@ -992,7 +993,7 @@ MissingE.packages.betterReblogs = {
                   return;
                }
                var currPos = $(window).scrollTop()+7;
-               $('#posts li.post').each(function() {
+               $('#posts div.post').each(function() {
                   var postPos = this.offsetTop;
                   if (postPos === currPos) {
                      var isManual = false;
