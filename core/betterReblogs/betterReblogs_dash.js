@@ -599,7 +599,6 @@ MissingE.packages.betterReblogs = {
             }
          });
          var txt = '<div id="MissingE_quick_reblog">' +
-                    '<div id="MissingE_qr_nipple"></div>' +
                     '<div class="MissingE_qr_list">';
          for (idx=0; idx<MissingE.getLocale(lang).reblogOptions.length; idx++) {
             var doonclick = 'onclick="return false;"';
@@ -688,6 +687,7 @@ MissingE.packages.betterReblogs = {
                   '<textarea rows="2" /><br />' +
                   MissingE.escapeHTML(MissingE.getLocale(lang).tagsText) +
                   '</div></div>' + node[1];
+         txt +=  '<div id="MissingE_qr_nipple"></div>';
          var qr = $(txt).appendTo('body');
          qr.find('#MissingE_quick_reblog_caption textarea')
             .attr('placeholder', MissingE.getLocale(lang).captionText);
@@ -841,7 +841,11 @@ MissingE.packages.betterReblogs = {
             clearTimeout(MissingE.packages.betterReblogs.resetTumblr);
             delete MissingE.packages.betterReblogs.resetTumblr;
             var pos = reblog.offset();
-            var h = reblog.outerHeight() - 2;
+            // Ensure the quick reblog is rendered so that outerHeight() computes the correct value
+            if (!qr.is(':visible')) {
+               qr.css('cssText', 'top: -1000px !important; display: block !important;');
+            }
+            var h = (qr.outerHeight()) - 2;
             var w = (qr.outerWidth()>>1) - (reblog.innerWidth()>>1);
             var marg = parseInt($('body').css('margin-top'), 10);
             if (isNaN(marg)) { marg = 0; }
@@ -894,7 +898,7 @@ MissingE.packages.betterReblogs = {
                               .replace(/\?&/,'?').replace(/&&/,'&')
                               .replace(/[\?&]$/,'') + arg;
             qr.find('#MissingE_quick_reblog_manual').attr('href', newurl);
-            h = Math.round(pos.top+h-marg);
+            h = Math.round(pos.top-h-marg);
             w = Math.round(pos.left-w-1);
             qr.removeData('off');
             if (e.relatedTarget) {

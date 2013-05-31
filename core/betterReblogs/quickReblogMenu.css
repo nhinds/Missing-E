@@ -40,7 +40,7 @@ display:block;
 background-repeat:no-repeat;
 background-position:0 0;
 position:absolute;
-top:-1px !important;
+bottom:-4px !important;
 left:50% !important;
 }
 
@@ -118,9 +118,9 @@ vertical-align:-2px;
 }
 
 #posts .post .post_controls .MissingE_quick_reblog_main{
-  background-position: -498px -270px;
-  width: 24px !important; 
-  height: 20px !important;
+  background-position: -497px -268px;
+  width: 25px !important; 
+  height: 25px !important;
 }
 
 #posts .post .post_controls .MissingE_quick_reblogging,
