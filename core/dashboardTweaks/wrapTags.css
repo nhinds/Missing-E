@@ -21,29 +21,23 @@
  * along with 'Missing e'. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#posts .post .post_footer_links.with_tags {
+#posts .post .post_tags {
 overflow:visible !important;
+line-height:14px !important;
+white-space:normal !important;
 }
 
-#posts .post .post_footer_links.with_tags span {
+#posts .post .post_tags .post_tag {
 display:inline !important;
 overflow:visible !important;
 }
 
-#posts .post .post_footer_links.with_tags .source_url {
+/*#posts .post .post_tags .source_url {
 display:inline-block !important;
 overflow:hidden !important;
-}
-
-span.tags {
-white-space:normal !important;
-}
+}*/
 
 span.with_blingy_tag a.blingy {
 height:auto !important;
 display:inline-block !important;
-}
-
-#posts .post .post_footer_links .tags {
-line-height:12px !important;
 }
