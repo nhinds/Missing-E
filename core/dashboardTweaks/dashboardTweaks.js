@@ -775,7 +775,7 @@ MissingE.packages.dashboardTweaks = {
             var currPos = $(window).scrollTop()+7;
             $('#posts div.post:not(#new_post)').each(function() {
                var postPos = this.offsetTop;
-               if (postPos === currPos) {
+               if (Math.abs(postPos - currPos) < 5) {
                   myPid = this.id.match(/post_(\d*)/);
                   if (!myPid || myPid.length < 2) { return false; }
                   myPid = myPid[1];

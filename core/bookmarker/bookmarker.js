@@ -466,7 +466,7 @@ MissingE.packages.bookmarker = {
                   var currPos = $(window).scrollTop()+7;
                   $('#posts div.post').each(function() {
                      var postPos = this.offsetTop;
-                     if (postPos === currPos) {
+                     if (Math.abs(postPos - currPos) < 5) {
                         var mark = $(this).find('div.post_controls a.MissingE_mark');
                         if (mark.length === 0) { return false; }
                         mark = mark.get(0);

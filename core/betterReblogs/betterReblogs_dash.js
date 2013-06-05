@@ -999,7 +999,7 @@ MissingE.packages.betterReblogs = {
                var currPos = $(window).scrollTop()+7;
                $('#posts div.post').each(function() {
                   var postPos = this.offsetTop;
-                  if (postPos === currPos) {
+                  if (Math.abs(postPos - currPos) < 5) {
                      var isManual = false;
                      var rebBtn = $(this).find('div.post_controls ' +
                                                'a[href^="/reblog/"]').get(0);
