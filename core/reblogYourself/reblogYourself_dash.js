@@ -26,7 +26,7 @@
 MissingE.packages.reblogYourself = {
 
    addReblog: function(item) {
-      if (item.tagName === "LI" && $(item).hasClass('post') &&
+      if (item.tagName === "DIV" && $(item).hasClass('post') &&
           !$(item).hasClass('new_post') && !$(item).hasClass('note')) {
          $(item).find('div.post_controls a.MissingE_reblogYourself_retry')
                   .remove();
@@ -39,7 +39,7 @@ MissingE.packages.reblogYourself = {
             return true;
          }
          var tid = $(item).attr("id").match(/\d*$/)[0];
-         var perm = $(item).find("a.permalink:first");
+         var perm = $(item).find("a.post_permalink:first");
          if (perm.length === 0) {
             return;
          }
@@ -74,11 +74,11 @@ MissingE.packages.reblogYourself = {
                      .replace(/&/g,'%26');
 
          var nr = $('<a />',
-                    {title: reblog_text, "class": "post_control reblog_button",
+                    {title: reblog_text, "class": "post_control reblog",
                      href: "/reblog/" + response.pid + "/" + response.data +
                            "?redirect_to=" + redir});
          if (before.length === 0) {
-            nr.prependTo(post.find('div.post_controls')).after(' ');
+            nr.prependTo(post.find('div.post_controls_inner')).after(' ');
          }
          else {
             nr.insertAfter(before).before(' ');
@@ -98,7 +98,7 @@ MissingE.packages.reblogYourself = {
                       "class": "post_control MissingE_reblogYourself_retry",
                       click: function() { return false; }});
          if (before.length === 0) {
-            nre.prependTo(item.find('div.post_controls')).after(' ');
+            nre.prependTo(item.find('div.post_controls_inner')).after(' ');
          }
          else {
             nre.insertAfter(before).before(' ');

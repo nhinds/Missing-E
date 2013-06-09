@@ -37,7 +37,7 @@ MissingE.packages.betterReblogs = {
    },
 
    addAskReblog: function(item) {
-      if (item.tagName === "LI" && $(item).hasClass('post') &&
+      if (item.tagName === "DIV" && $(item).hasClass('post') &&
           $(item).hasClass('note')) {
          $(item).find('div.post_controls a.MissingE_betterReblogs_retryAsk')
                   .remove();
@@ -47,7 +47,7 @@ MissingE.packages.betterReblogs = {
             return true;
          }
          var tid = $(item).attr("id").match(/\d*$/)[0];
-         var perm = $(item).find("a.permalink:first");
+         var perm = $(item).find("a.post_permalink:first");
          if (perm.length === 0) {
             return;
          }
@@ -63,7 +63,7 @@ MissingE.packages.betterReblogs = {
       if (item.find('div.post_controls a[href^="/reblog"]').length > 0) {
          return;
       }
-      var perm = item.find("a.permalink:first");
+      var perm = item.find("a.post_permalink:first");
       var tid = response.pid;
       var klass, before, rblnk, txt,i;
 
@@ -94,14 +94,14 @@ MissingE.packages.betterReblogs = {
       if (response.success) {
          rblnk = $('<a />',
                    {title: reblog_text,
-                    "class": "reblog_button",
+                    "class": "reblog",
                     href: "/reblog/" + tid + "/" + response.data +
                           "/text?post%5Bone%5D=" +
                           MissingE.escapeHTML(question) + "&MissingEaskName=" +
                           response.name + "&MissingEaskPost=" +
                           encodeURIComponent(perm.attr("href"))});
          if (before.length === 0) {
-            rblnk.prependTo(item.find('div.post_controls')).after(' ');
+            rblnk.prependTo(item.find('div.post_controls_inner')).after(' ');
          }
          else {
             rblnk.insertAfter(before).before(' ');
@@ -117,7 +117,7 @@ MissingE.packages.betterReblogs = {
                     "class": "post_control MissingE_betterReblogs_retryAsk",
                     click: function() { return false; }});
          if (before.length === 0) {
-            rblnk.prependTo(item.find('div.post_controls')).after(' ');
+            rblnk.prependTo(item.find('div.post_controls_inner')).after(' ');
          }
          else {
             rblnk.insertAfter(before).before(' ');
@@ -279,7 +279,7 @@ MissingE.packages.betterReblogs = {
 
    reblogTextFull: function(item) {
       var post = $(item);
-      if (item.tagName === 'LI' &&
+      if (item.tagName === 'DIV' &&
           post.hasClass('post') &&
           post.hasClass('regular')) {
          post.find('div.post_controls a[href^="/reblog/"]').each(function() {
@@ -290,7 +290,7 @@ MissingE.packages.betterReblogs = {
          });
       }
       else if (item.tagName === 'A' &&
-               post.parent().is('div.post_controls') &&
+               post.parent().is('div.post_controls_inner') &&
                post.closest('div.post').hasClass('regular')) {
          if (/[\w]\?/.test(item.href)) {
             item.setAttribute('href',
@@ -343,7 +343,7 @@ MissingE.packages.betterReblogs = {
          "private": 'private'
       };
       var i,isAsk,type,url,postId,perm,user, $item = $(item);
-      if ($item.parent().hasClass('post_controls')) {
+      if ($item.parent().hasClass('post_controls_inner')) {
          type = 'normal';
          postId = $(item).closest('div.post').attr('id').match(/\d*$/)[0];
       }
@@ -482,7 +482,7 @@ MissingE.packages.betterReblogs = {
       var settings = this.settings;
       var queueTags = "", reblogTags = "";
 
-      $('#posts .post_controls .reblog_button').mouseover(function() {
+      $('#posts .post_controls .reblog').mouseover(function() {
          var item = $(this);
          var post = item.closest('.post');
          if (!post.hasClass('note') &&
@@ -834,7 +834,7 @@ MissingE.packages.betterReblogs = {
                .live('mouseover',function(e) {
             var reblog = $(this);
             reblog.addClass('MissingE_quick_reblog_main')
-                  .removeClass('reblog_button');//remove the class to prevent the native popup from showing up
+                  // .removeClass('reblog');//remove the class to prevent the native popup from showing up
             if (reblog.hasClass('MissingE_quick_reblogging')) {
                return;
             }

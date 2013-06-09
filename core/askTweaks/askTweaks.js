@@ -36,7 +36,7 @@ MissingE.packages.askTweaks = {
       var id = item.id.match(/\d+$/);
       if (!id) { return; }
       id = id[0];
-      var controls = post.find('.post_controls');
+      var controls = post.find('.post_controls_inner');
       if (controls.find('a[onclick*="queue_post"], ' +
                         'a[onclick*="approve_post"]').length === 0) {
          var addPub = $('<a href="#" onclick="return approve_post(' + id +
@@ -71,7 +71,7 @@ MissingE.packages.askTweaks = {
          mds.appendTo($(item));
       }
       else {
-         mds.appendTo($(item).find('div.post_controls'));
+         mds.appendTo($(item).find('div.post_controls_inner'));
       }
    },
 
@@ -284,7 +284,7 @@ MissingE.packages.askTweaks = {
 
    moreAnswerOptions: function(item, tagAsker, defTags, betterAnswers) {
       var i;
-      if (item.tagName !== 'LI' || !$(item).hasClass('post')) {
+      if (item.tagName !== 'DIV' || !$(item).hasClass('post')) {
          return false;
       }
       var answer = $(item).find('form[action="#"]');
@@ -685,7 +685,7 @@ MissingE.packages.askTweaks = {
                         item.data('blog','private');
                      }
                      else {
-                        blog = item.find('a.permalink').attr('href');
+                        blog = item.find('a.post_permalink').attr('href');
                         blog = blog.replace(/^[^\/]*\/\//,'')
                                     .replace(/\/.*/,'');
                         item.data('blog',blog);

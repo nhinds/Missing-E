@@ -53,7 +53,7 @@ color:#818B98;
 font-style:italic;
 }
 
-#posts .post .post_controls .reblog_button:after,
+#posts .post .post_controls .reblog:after,
 #posts .post .post_controls .reply_button:after {
 content:attr(title);
 text-transform:lowercase;
@@ -64,7 +64,7 @@ content:attr(label);
 text-transform:lowercase;
 }
 
-#posts .post .post_controls .reblog_button,
+#posts .post .post_controls .reblog,
 #posts .post .post_controls .reply_button,
 #posts .post .post_controls .MissingE_experimental_reply_fail,
 #posts .post .post_controls .MissingE_experimental_reply_success {

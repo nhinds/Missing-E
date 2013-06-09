@@ -148,10 +148,10 @@ right:20px;
 }
 
 #posts div.post .MissingEmassDeleteSpan {
-vertical-align:middle !important;
-margin-left:20px;
+vertical-align:top !important;
 opacity:0.5;
-line-height:18px !important;
+display: inline-block;
+margin: 10px 0 10px 20px;
 }
 
 #dashboard_submissions #posts div.post .MissingEmassDeleteSpan,

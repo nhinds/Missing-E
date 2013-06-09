@@ -43,7 +43,7 @@ MissingE.packages.magnifier = {
    magAvatarClick: function(e) {
       if (e.which === 1) {
          var src;
-         var li = $(this).closest('li,div.follower,#crushes');
+         var li = $(this).closest('div.post,div.follower,#crushes');
          if (li.hasClass('notification')) {
             src = $(this).siblings('img.avatar').attr('src');
          }
@@ -84,7 +84,7 @@ MissingE.packages.magnifier = {
          mag = $('<div class="MissingE_magnify_avatar"></div>')
             .appendTo(it.find('a.avatar_frame'));
       }
-      else if (item.tagName === "LI" && it.hasClass("post") &&
+      else if (item.tagName === "DIV" && it.hasClass("post") &&
                !it.hasClass('queued')) {
          mag = $('<div class="MissingE_magnify_avatar"></div>')
             .appendTo(it.find('div.avatar_and_i'));
@@ -100,10 +100,10 @@ MissingE.packages.magnifier = {
    },
 
    insertMagnifier: function(item) {
-      if (item.tagName === "LI" && $(item).hasClass("post") &&
+      if (item.tagName === "DIV" && $(item).hasClass("post") &&
           $(item).hasClass("photo")) {
          var lang = $('html').attr('lang');
-         var ctrl = $(item).find('div.post_controls');
+         var ctrl = $(item).find('div.post_controls_inner');
          if (ctrl.find('.MissingE_magnify').length > 0) {
             return;
          }

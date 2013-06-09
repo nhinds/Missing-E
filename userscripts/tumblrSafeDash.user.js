@@ -317,7 +317,7 @@
       if (LS_getValue('tnsfw_State',0)==0) safe = false;
       else safe = true;
       var node = jQuery(item);
-      if (item.tagName == 'LI') {
+      if (item.tagName == 'LI' || item.tagName == 'DIV') {
          if (node.hasClass('notification')) {
             jQuery('blockquote img:not(.nsfwdone)',node).each(function(){
                var klass = "";
@@ -486,6 +486,6 @@
    }, false);
    
    if (isFF) scriptUpdater.doCheck();
-   jQuery('#posts li.post, #posts li.notification, ol.notes').each(function(){doHide(this)});
+   jQuery('#posts div.post, #posts li.notification, ol.notes').each(function(){doHide(this)});
 
 }());

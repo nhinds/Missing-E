@@ -29,7 +29,7 @@ MissingE.packages.dashboardTweaks = {
       if ($('#' + item.id + '_select').length > 0) {
          return;
       }
-      var controls = $(item).find('div.post_controls');
+      var controls = $(item).find('div.post_controls_inner');
       controls.append(' ');
       $('<span />', {"class": "MissingEmassDeleteSpan"})
          .append($('<input />',
@@ -95,7 +95,7 @@ MissingE.packages.dashboardTweaks = {
 
    doReplies: function(item) {
       var node = $(item);
-      if (item.tagName !== 'LI' ||
+      if (item.tagName !== 'DIV' ||
           !(node.hasClass('post')) ||
           !(node.hasClass('is_reblog')) ||
           node.hasClass('is_mine') ||
@@ -169,7 +169,7 @@ MissingE.packages.dashboardTweaks = {
 
    addExpandAllHandler: function(item) {
       var post = $(item);
-      if (item.tagName !== 'LI' || !post.hasClass('post')) {
+      if (item.tagName !== 'DIV' || !post.hasClass('post')) {
          return false;
       }
       post.find('.inline_image,.inline_external_image').click(function() {
@@ -463,13 +463,13 @@ MissingE.packages.dashboardTweaks = {
 
    smallIconsZIndex: function(post) {
       var idx = 10000;
-      var ctrl = post.find('.post_controls');
+      var ctrl = post.find('.post_controls_inner');
       var nextPost = post.next();
       while (nextPost && nextPost.length > 0 && !nextPost.hasClass('post')) {
          nextPost = nextPost.next();
       }
       if (nextPost && nextPost.length > 0 && nextPost.hasClass('post')) {
-         var nextCtrl = nextPost.find('.post_controls').css('z-index','auto');
+         var nextCtrl = nextPost.find('.post_controls_inner').css('z-index','auto');
       }
       var overlay = $('#overlay_for_active_menu');
       if (overlay.length === 0) {
@@ -533,7 +533,7 @@ MissingE.packages.dashboardTweaks = {
          if (type === 'notes') { return; }
          $.each(list, function (i,val) {
             var node = $('#'+val);
-            if (node.get(0).tagName === 'LI' && node.hasClass('post')) {
+            if (node.get(0).tagName === 'DIV' && node.hasClass('post')) {
                if ($('#posts div.post[id="' + node.attr('id') + '"]')
                      .length > 1) {
                   node.remove();
@@ -583,7 +583,7 @@ MissingE.packages.dashboardTweaks = {
 
       $('#posts .post_controls .reply_button form button').live('click',
             function() {
-         var me = $(this).closest('.post_controls');
+         var me = $(this).closest('.post_controls_inner');
          me.find('div.MissingE_reply_overlay').remove();
       });
 

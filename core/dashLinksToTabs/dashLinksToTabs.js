@@ -41,7 +41,7 @@ MissingE.packages.dashLinksToTabs = {
          return false;
       }
       if ($(node).closest('#dashboard_controls').length > 0) { return false; }
-      if ($(node).parent().hasClass('post_controls')) {
+      if ($(node).parent().hasClass('post_controls_inner')) {
          if (/^\/reblog\/\d+\//.test($(node).attr('href')) &&
              settings.reblogLinks !== 1) {
             return false;

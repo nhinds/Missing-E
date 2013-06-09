@@ -167,7 +167,7 @@ MissingE.packages.replyReplies = {
             var posttxt = "";
             var titletxt = "";
             var anstxt = "";
-            var postlnk = main.find('a.permalink').attr('href');
+            var postlnk = main.find('a.post_permalink').attr('href');
             if (main.find('div.post_question').length > 0) {
                posttxt = main.find('div.post_question').text();
             }
@@ -459,7 +459,7 @@ MissingE.packages.replyReplies = {
          }
       });
 
-      $('#posts li.is_mine ol.notes').live('mouseover', function() {
+      $('#posts div.post.is_mine ol.notes').live('mouseover', function() {
          $(this).find('li:not(.MissingE_reply)').each(function() {
             MissingE.packages.replyReplies.addNoteReply($(this), overrideStyle);
          });

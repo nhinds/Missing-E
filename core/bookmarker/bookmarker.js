@@ -298,7 +298,7 @@ MissingE.packages.bookmarker = {
    },
 
    doMarks: function(item) {
-      if (item.tagName === 'LI' && $(item).hasClass('post')) {
+      if (item.tagName === 'DIV' && $(item).hasClass('post')) {
          var lang = $('html').attr('lang');
          var post = $(item).attr('id').match(/\d*$/)[0];
          if (MissingE.isTumblrURL(location.href, ["tagged"]) &&
@@ -307,7 +307,7 @@ MissingE.packages.bookmarker = {
               $('#user_menu_' + post).length === 0)) {
             return false;
          }
-         var ctrl = $(item).find('div.post_controls:not(.bookmarkAdded)');
+         var ctrl = $(item).find('div.post_controls_inner:not(.bookmarkAdded)');
          var j;
          var marks = MissingE.packages.bookmarker
             .parseMarks(MissingE.getStorage("MissingE_bookmarker_marks",""));

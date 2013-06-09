@@ -62,7 +62,7 @@ MissingE.packages.postingTweaks = {
    },
 
    addAskUploader: function(obj) {
-      if (obj.tagName === 'LI' && $(obj).hasClass('post')) {
+      if (obj.tagName === 'DIV' && $(obj).hasClass('post')) {
          if ($(obj).find('div.post_controls a[id^="ask_answer_link"]')
                .length === 0) {
             return;

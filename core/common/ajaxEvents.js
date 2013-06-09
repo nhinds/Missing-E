@@ -85,9 +85,9 @@ MissingE.utilities.ajaxEvents = {
                   '}' +
                '}' +
                'else if (type !== "notes") {' +
-                  'newPosts = xhr.responseText.match(/<li id="(post_\\d+)/g) || [];' +
+                  'newPosts = xhr.responseText.match(/id="(post_\\d+)/g) || [];' +
                   'for (i=0; i<newPosts.length; i++) {' +
-                     'newPosts[i] = newPosts[i].replace(/<li id="/,"");' +
+                     'newPosts[i] = newPosts[i].replace(/id="/,"");' +
                   '}' +
                '}' +
                'var evt = document.createEvent("MessageEvent");' +

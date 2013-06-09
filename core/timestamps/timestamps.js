@@ -58,12 +58,12 @@ MissingE.packages.timestamps = {
 
    loadTimestamp: function(item) {
       var lang = $('html').attr('lang');
-      if (item.tagName === "LI" && $(item).hasClass("post") &&
+      if (item.tagName === "DIV" && $(item).hasClass("post") &&
           !$(item).hasClass("fan_mail") &&
           $(item).attr("id") !== "new_post" &&
           $(item).find('.private_label').length === 0) {
          var tid = $(item).attr("id").match(/\d*$/)[0];
-         var perm = $(item).find("a.permalink:first");
+         var perm = $(item).find("a.post_permalink:first");
          var addr, type, stamp;
          if (MissingE.isTumblrURL(location.href, ["messages"])) {
             type = 'ask';

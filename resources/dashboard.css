@@ -1280,7 +1280,7 @@ color:#c0c9d3
 text-decoration:underline
 }
 
-#posts .post .permalink{
+#posts .post .post_permalink{
 position:absolute;
 right:0;
 top:0;
@@ -1290,11 +1290,11 @@ display:none;
 background:-500px -190px url('/images/dashboard_master_sprite.png') no-repeat #2c4762
 }
 
-#posts .post .permalink.priority_post{
+#posts .post .post_permalink.priority_post{
 background:url('/images/featured_post_permalink.png') top left no-repeat transparent
 }
 
-#posts .post:hover .permalink{
+#posts .post:hover .post_permalink{
 display:inline-block
 }
 

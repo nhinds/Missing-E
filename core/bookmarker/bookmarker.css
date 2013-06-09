@@ -94,7 +94,7 @@ color:white !important;
 opacity:1;
 }
 
-a.MissingE_mark {
+a.post_control.MissingE_mark {
 border-width:0;
 height:20px;
 width:11px;
@@ -104,7 +104,7 @@ background-attachment:scroll;
 background-position:0 0;
 }
 
-a.MissingE_ismarked {
+a.post_control.MissingE_ismarked {
 background-position:-9px 0;
 opacity:1 !important;
 }
