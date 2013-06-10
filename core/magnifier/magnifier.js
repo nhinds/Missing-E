@@ -101,14 +101,16 @@ MissingE.packages.magnifier = {
 
    insertMagnifier: function(item) {
       if (item.tagName === "DIV" && $(item).hasClass("post") &&
-          $(item).hasClass("photo")) {
+          ( $(item).hasClass("is_photo") || $(item).hasClass("is_photoset"))
+	  ) {
          var lang = $('html').attr('lang');
          var ctrl = $(item).find('div.post_controls_inner');
          if (ctrl.find('.MissingE_magnify').length > 0) {
             return;
          }
+
          var bm = ctrl.find('a.MissingE_mark');
-         var heart = ctrl.find('a.like_button');
+         var heart = ctrl.find('a.like');
          var publish;
          var tid = $(item).attr("id").match(/\d*$/)[0];
          var img;
@@ -233,7 +235,7 @@ MissingE.packages.magnifier = {
             curr.fadeOut('fast');
             next.fadeIn('slow');
          });
-         $('#posts div.post[class~="photo"]').each(function(){
+         $('#posts div.post[class=~"is_photo"]').each(function(){
             MissingE.packages.magnifier.insertMagnifier(this);
          });
          extension.addAjaxListener(function(type,list) {
